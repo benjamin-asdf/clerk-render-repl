@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;; connect with `nbb` type
 (cider-connect-cljs '(:host "localhost" :port 1339 :cljs-repl-type nbb))
 
