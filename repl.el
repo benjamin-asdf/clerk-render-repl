@@ -10,6 +10,8 @@
 
 ;; Version 1, a bespoke jack-in-clj&cljs:
 
+;; cider-jack-in-clj&cljs-single-process
+
 (defun clerk-render-repl-cider-jack-in-clj&cljs (&optional params)
   "A bespoke cider jack in for clerk-render-repl.
 This waits for both nrepl servers to run and then jacks in a clj and a cljs nrepl."
@@ -53,6 +55,9 @@ This waits for both nrepl servers to run and then jacks in a clj and a cljs nrep
                               params
                               server-buffer)))
                (cider-register-cljs-repl-type 'sci-browser-nrepl)
+               ;; I think it first needed to open the browser or something,
+               ;; it's possible you need to increase this
+               ;; (symptom was that cider timed out with sync request 'describe op')
                (sit-for 1)
                (cider-connect-sibling-cljs
                 (thread-first
@@ -66,6 +71,10 @@ This waits for both nrepl servers to run and then jacks in a clj and a cljs nrep
 (let ((cider-clojure-cli-aliases ":dev"))
   (clerk-render-repl-cider-jack-in-clj&cljs))
 
+;; ./nrepl/1.edn
+;;         {:host '' :port ''}
+;;         {:socket-file ''}
+;; ./nrepl/2.edn
 
 
 ;; I also need to setup an env for jvm
